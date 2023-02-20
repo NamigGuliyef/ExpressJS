@@ -10,9 +10,11 @@ connect(uri)
 const app = express()
 
 app.use(express.json())
+
 app.use('/companies', CompanyRouter)
 app.use('/departments', DepartmentRouter)
 app.use('/employees', EmployeeRouter)
+
 
 
 app.listen(5055, () => {

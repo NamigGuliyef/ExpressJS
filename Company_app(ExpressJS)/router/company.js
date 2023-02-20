@@ -30,4 +30,5 @@ r.delete('/:compId', async (req, res) => {
     res.send(DeletedId)
 })
 
+
 export default r
