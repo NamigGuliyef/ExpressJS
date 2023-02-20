@@ -12,6 +12,10 @@ const DepartmentSchema = new Schema({
         type: String,
         required: true
     },
+    company: {
+        type: String,
+        required: true
+    },
     companyId: {
         type: mongoose.ObjectId,
         required: true
