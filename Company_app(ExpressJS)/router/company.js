@@ -2,7 +2,7 @@ import { Router } from "express";
 import CompanyModel from "../model/company.js";
 
 const r = Router()
-
+// A: done ✅
 r.get('/', async (req, res) => {
     const AllData = await CompanyModel.find()
     res.send(AllData)
