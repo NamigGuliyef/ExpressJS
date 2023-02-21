@@ -9,24 +9,24 @@ r.get('/', async (req, res) => {
 })
 
 r.get('/:compId', async (req, res) => {
-    const FoundId = await CompanyModel.findOne({ _id: req.params.depId })
-    res.send(FoundId)
+    const data = await CompanyModel.findOne({ _id: req.params.compId })
+    res.send(data)
 })
 
 r.post('/', async (req, res) => {
-    const CreateData = await CompanyModel.create(req.body)
-    res.send(CreateData)
+    const createData = await CompanyModel.create(req.body)
+    res.send(createData)
 })
 
 r.put('/:compId', async (req, res) => {
-    const UpdateData = await CompanyModel.findOneAndUpdate({ _id: req.params.depId }, {
+    const updateData = await CompanyModel.findOneAndUpdate({ _id: req.params.compId }, {
         $set: req.body
     }, { new: true })
-    res.send(UpdateData)
+    res.send(updateData)
 })
 
 r.delete('/:compId', async (req, res) => {
-    const DeletedId = await CompanyModel.findOneAndDelete({ _id: req.params.depId })
+    const DeletedId = await CompanyModel.findOneAndDelete({ _id: req.params.compId })
     res.send(DeletedId)
 })
 

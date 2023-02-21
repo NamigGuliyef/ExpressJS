@@ -14,8 +14,8 @@ r.get('/companies/:companyId', async (req, res) => {
 })
 
 r.get('/:depId', async (req, res) => {
-    const FoundId = await DepartmentModel.findOne({ _id: req.params.depId })
-    res.send(FoundId)
+    const data = await DepartmentModel.findOne({ _id: req.params.depId })
+    res.send(data)
 })
 
 r.post('/', async (req, res) => {
