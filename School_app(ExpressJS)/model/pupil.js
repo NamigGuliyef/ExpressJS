@@ -1,5 +1,5 @@
-import mongoose, { model } from "mongoose";
-export const pupilModel = model("pupil", {
+import mongoose, { model, Schema } from "mongoose";
+export const pupilModel = model("pupil",Schema({
     name: String,
     surname: String,
     school_No: String,
@@ -10,4 +10,4 @@ export const pupilModel = model("pupil", {
     directorId: String,
     teacherId: String,
     classId: String,
-})
+}))
