@@ -14,6 +14,7 @@ const CompanySchema = new Schema({
     },
     departmentId: [mongoose.ObjectId],
     employeeId: [mongoose.ObjectId]
-    
+
 }, { versionKey: false })
+
 export default CompanySchema
