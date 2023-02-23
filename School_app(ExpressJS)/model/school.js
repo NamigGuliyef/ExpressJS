@@ -1,5 +1,6 @@
 import mongoose, { model, Schema } from "mongoose";
-export const schoolModel = model('school', Schema({
+
+const schoolSchema = new Schema({
     school_No: {
         type: Number,
         required: true
@@ -8,8 +9,20 @@ export const schoolModel = model('school', Schema({
         type: String,
         required: true
     },
-    director: [mongoose.ObjectId],
+    director: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "directors"
+    }],
     teacher: [mongoose.ObjectId],
     class: [mongoose.ObjectId],
     pupil: [mongoose.ObjectId]
-}, { versionKey: false, timestamps: true }))
+}, { versionKey: false, timestamps: true })
+
+
+export const schoolModel = model('school', schoolSchema)
+
+
+// schoolSchema.pre('save',(next)=>{
+
+// })

@@ -1,4 +1,5 @@
 import { directorModel } from "../model/director.js";
+import { schoolModel } from "../model/school.js";
 
 export const getAll = async (req, res) => {
     const data = await directorModel.find()
@@ -18,6 +19,9 @@ export const getBySchoolId = async (req, res) => {
 export const createData = async (req, res) => {
     const newDirector = req.body
     const data = await directorModel.create(newDirector)
+    // await schoolModel.findByIdAndUpdate(newDirector.schoolId, {
+    //     $push: { directorId: _id }
+    // })
     res.send(data)
 }
 
