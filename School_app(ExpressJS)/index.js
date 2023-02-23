@@ -13,6 +13,8 @@ connect(uri)
 
 const app = express()
 
+app.use(express.json())
+
 app.use('/directors', directorRouter)
 app.use('/schools', schoolRouter)
 app.use('/teachers', teachRouter)

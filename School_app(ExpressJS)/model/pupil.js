@@ -10,4 +10,4 @@ export const pupilModel = model("pupil",Schema({
     directorId: String,
     teacherId: String,
     classId: String,
-}))
+}, { versionKey: false, timestamps: true }))

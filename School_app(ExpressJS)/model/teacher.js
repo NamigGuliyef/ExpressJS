@@ -10,4 +10,4 @@ export const teachModel = model("teacher", Schema({
     schoolId: String,
     class: [mongoose.ObjectId],
     pupil: [mongoose.ObjectId]
-}))
+}, { versionKey: false, timestamps: true }))
