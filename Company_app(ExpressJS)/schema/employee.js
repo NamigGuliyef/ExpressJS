@@ -29,13 +29,16 @@ const EmployeeSchema = new Schema({
         required: true
     },
     companyId: {
-        type: mongoose.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'company'
     },
     departmentId: {
-        type: mongoose.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'department'
     }
 
-}, { versionKey: false })
+}, { versionKey: false, timestamps: true })
+
 export default EmployeeSchema

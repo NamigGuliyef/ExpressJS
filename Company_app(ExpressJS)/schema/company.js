@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { mongo, Schema } from "mongoose";
 const CompanySchema = new Schema({
     name: {
         type: String,
@@ -12,9 +12,16 @@ const CompanySchema = new Schema({
         type: String,
         required: true
     },
-    departmentId: [mongoose.ObjectId],
-    employeeId: [mongoose.ObjectId]
+    departmentId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'department'
+    }],
+    employeeId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'employee'
+    }]
 
-}, { versionKey: false })
+}, { versionKey: false, timestamps: true })
+
 
 export default CompanySchema
