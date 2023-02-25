@@ -1,4 +1,4 @@
-import { schoolModel } from "../model/school.js";
+import { schoolModel } from "../model/school.js"
 
 export const getData = async (req, res) => {
     const data = await schoolModel.find()

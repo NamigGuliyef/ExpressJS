@@ -6,8 +6,16 @@ export const teachModel = model("teacher", Schema({
     lesson: String,
     director: String,
     school_No: String,
-    directorId: String,
-    schoolId: String,
+    directorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "directors"
+    },
+    schoolId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "schools"
+    },
     class: [mongoose.ObjectId],
     pupil: [mongoose.ObjectId]
 }, { versionKey: false, timestamps: true }))
