@@ -33,22 +33,19 @@ const DepartmentSchema = new Schema({
 
 
 DepartmentSchema.pre('save', async function (next) {
-    const isExist = await DepartmentModel.findOne({ name: this.name }) // save etmemisden evvel yoxlamaq 
-    if (isExist) {   // eger varsa 
+    const isExist = await DepartmentModel.findOne({ name: this.name })
+    if (isExist) {
         console.log('Department has already been created ')
-        process.exit(-1) // prosesi  dayandirir
+        process.exit(-1)
     }
-    next()  // eks halda novbeti prosesi icra edir
+    next()
 })
 
 
 DepartmentSchema.pre('findOneAndDelete', async function (next) {
-    const DepId = this.getFilter()._id  // silinen departamentin Id - si ( arqument )
-    const department = await DepartmentModel.findOne({ _id: DepId }).clone()  // həmin İD modelde hansi obyektin
-                                                                // ID -sine uygundursa tapmaq
-    await CompanyModel.updateOne({ companyId: department.companyId }, { // tapilan ID -ni company den silmek ucun
-                                // companyID=departamentde olan comp ID beraberdirse silinmis ID ni 
-                                // company-den departmentin silinmis ID -sini cixartsin
+    const DepId = this.getFilter()._id
+    const department = await DepartmentModel.findOne({ _id: DepId }).clone()
+    await CompanyModel.updateOne({ _id: department.companyId }, {
         $pull: { departmentId: DepId }
     })
     next()
@@ -56,11 +53,20 @@ DepartmentSchema.pre('findOneAndDelete', async function (next) {
 
 
 DepartmentSchema.post('save', async function () {
-    const depId = this._id  // yaradilan obyektin ID si tapilsin
-    await CompanyModel.findOneAndUpdate(this.companyId, {  // hemin comp ID => companyde olan dep.ID ye elave olunsun.
+    const depId = this._id
+    await CompanyModel.findOneAndUpdate(this.companyId, {
         $push: { departmentId: depId }
     })
 })
+
+
+
+DepartmentSchema.pre('findOneAndDelete', async function (next) {
+    const depId = this.getFilter()._id
+    await mongoose.model('employee').deleteMany({ departmentId: depId })
+    next()
+})
+
 
 
 export default DepartmentSchema

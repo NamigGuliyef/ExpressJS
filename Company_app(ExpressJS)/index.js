@@ -18,8 +18,8 @@ app.use('/departments', DepartmentRouter)
 app.use('/employees', EmployeeRouter)
 
 
-const port = process.env.EXPRESS_APP_PORT
 
-app.listen(port, () => {
+
+app.listen(process.env.PORT, () => {
     console.log('server is up ....')
 })
