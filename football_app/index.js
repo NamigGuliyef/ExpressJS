@@ -3,7 +3,6 @@ import mongoose, { connect } from 'mongoose'
 import dotenv from 'dotenv'
 import { clubModel } from './model/index.js'
 import path from 'path'
-import multer from 'multer'
 import multerStorage from './multer.js'
 const uri = "mongodb+srv://football:football1@cluster0.kk1kc8e.mongodb.net/?retryWrites=true&w=majority"
 connect(uri)
