@@ -19,4 +19,11 @@ const warehouseSchema = new Schema({
     }
 }, { versionKey: false })
 
+
+warehouseSchema.pre('findOneAndDelete', async function (next) {
+    const warehouseId = this.getFilter()._id
+    await mongoose.model('product').deleteMany({ warehouseId })
+    next()
+})
+
 export default warehouseSchema

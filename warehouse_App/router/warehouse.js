@@ -1,38 +1,17 @@
 import { Router } from "express";
-import { warehouseModel } from "../model/warehouse.js";
+import { createData, deletedData, getAll, getById, updateData } from "../controller/warehouse.js";
 const r = Router()
 
-
-r.get('/', async (req, res) => {
-    const allData = await warehouseModel.find()
-    res.send(allData)
+r.use((req, res, next) => {
+    console.log('/warehouse request gonderildi!')
+    next()
 })
 
 
-r.get('/:Id', async (req, res) => {
-    const getData = await warehouseModel.findOne({ _id: req.params.Id })
-    res.send(getData)
-})
-
-
-r.post('/', async (req, res) => {
-    const createData = await warehouseModel.create(req.body)
-    res.send(createData)
-})
-
-
-r.put('/:Id', async (req, res) => {
-    const updateData = await warehouseModel.findOneAndUpdate({ _id: req.params.Id }, {
-        $set: req.body
-    }, { new: true })
-    res.send(updateData)
-})
-
-
-r.delete('/:Id', async (req, res) => {
-    const deletedData = await warehouseModel.findOneAndDelete({ _id: req.params.Id })
-    res.send(deletedData)
-})
-
+r.get('/', getAll)
+r.get('/:Id', getById)
+r.post('/', createData)
+r.put('/:Id', updateData)
+r.delete('/:Id', deletedData)
 
 export default r
