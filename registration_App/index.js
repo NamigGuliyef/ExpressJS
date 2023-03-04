@@ -49,10 +49,10 @@ app.post('/signin', async (req, res) => {
             const JWT_sECRET = 'secret'
             const token = jwt.sign({ username: userExist.username, email: userExist.email, password: userExist.password, _id: userExist._id }, JWT_sECRET)
             res.send(`<div>
-            <h4>username :  ${userExist.username}</h4>
-            <h4>email :  ${userExist.email}</h4>
-            <h4>password :  ${userExist.password}</h4>
-            <h4>token : ${token}</h4>
+            <h4 style="color:brown">username :  ${userExist.username}</h4>
+            <h4 style="color:brown">email :  ${userExist.email}</h4>
+            <h4 style="color:brown">password :  ${userExist.password}</h4>
+            <h4 style="color:brown">token : ${token}</h4>
             </div>`
             )
         }
