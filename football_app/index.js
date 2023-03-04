@@ -23,15 +23,14 @@ app.get('/clubs', async (req, res) => {
     const data = await clubModel.find()
     data.forEach((club) => {
         res.write(
-
             `<div >
              <h5 style="color:blue">ID: ${club._id}</h5>
              <h5 style="color:red">name: ${club.name}</h5>
              <h5 style="color:green">about: ${club.about}</h5>
              <img src="/${club.photo}" alt="photo"><hr>
              </div>
-            `
-        )
+            ` 
+            )
     })
     res.send()
 })
