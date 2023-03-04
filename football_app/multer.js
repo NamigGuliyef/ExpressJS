@@ -9,6 +9,7 @@ const storage = multer.diskStorage({
         }
         cb(err, 'gallery')
     },
+    
     filename: (req, file, cb) => {
         cb(null, req.body.name + file.originalname.replace(' ', '_'))
     }
