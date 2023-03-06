@@ -34,6 +34,6 @@ export const updateData=async (req, res) => {
 
 export const deletedData=async (req, res) => {
     const _id = req.params.Id
-    const deletedData = await studentModel.findByIdAndDelete({ _id })
+    const deletedData = await studentModel.findOneAndDelete({ _id })
     res.send(deletedData)
 }

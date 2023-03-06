@@ -13,7 +13,6 @@ app.use('/university', uniRouter)
 app.use('/student', studentRouter)
 
 
-
 app.listen(process.env.PORT, () => {
     console.log('server is up ...')
 })
