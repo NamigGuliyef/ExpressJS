@@ -57,7 +57,7 @@ app.post('/signin', async (req, res) => {
             )
         }
     }
-    res.send('Sifre ve ya parol yanlisdir!')
+    res.send('Sifre ve ya email yanlisdir!')
 })
 
 
