@@ -20,5 +20,13 @@ const uniSchema = new Schema({
     }
 }, { versionKey: false })
 
+
+uniSchema.pre('findOneAndDelete', async function (next) {
+    const universityId = this.getFilter()._id
+    await mongoose.model('student').deleteMany({universityId})
+    next()
+})
+
+
 const uniModel = model('university', uniSchema)
 export default uniModel
