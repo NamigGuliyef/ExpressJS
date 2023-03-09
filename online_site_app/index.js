@@ -14,7 +14,7 @@ const app = express()
 app.use(express.json())
 app.use('/users', userRouter)
 
-app.post('/reg:Id', async (req, res) => {
+app.post('/reg', async (req, res) => {
     const body = req.body
     const salt = await bcrypt.genSalt()
     const hashedPass = await bcrypt.hash(body.password, salt)
