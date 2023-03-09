@@ -12,10 +12,26 @@ dotenv.config()
 const app = express()
 
 app.use(express.json())
-app.use('/registration', userRouter)
+app.use('/users', userRouter)
+
+app.post('/reg:Id', async (req, res) => {
+    const body = req.body
+    const salt = await bcrypt.genSalt()
+    const hashedPass = await bcrypt.hash(body.password, salt)
+    const createData = await userModel.create({
+        name: body.name,
+        surname: body.surname,
+        age: body.age,
+        email: body.email,
+        password: hashedPass
+    })
+    res.status(201)
+    res.statusMessage = 'created'
+    res.send(createData)
+})
 
 
-const JWT_SECRET = 'S4CR4I'
+export const JWT_SECRET = 'S4CR4I'
 app.post('/signin', async (req, res) => {
     const body = req.body
     const userExist = await userModel.findOne({ email: body.email })
@@ -27,18 +43,21 @@ app.post('/signin', async (req, res) => {
     if (!isRightPass) {
         res.send('password incorrect')
     }
-    const token = jwt.sign({ email: userExist.email }, JWT_SECRET)
-    res.send({ token })
+    const token = jwt.sign({ email: userExist.email }, JWT_SECRET, {
+        expiresIn: '1m'
+    })
+    res.send({ 
+        _id:userExist._id,
+        email:userExist.email,
+        token
+     })
 })
 
 
 app.get('/profile', authMiddleware, (req, res) => {
-
-
-
-
-
+    res.send('Ok')
 })
+
 
 app.listen(process.env.PORT, () => {
     console.log('server is up...')

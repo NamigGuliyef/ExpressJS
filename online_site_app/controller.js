@@ -1,5 +1,4 @@
 import { userModel } from "./model.js"
-import bcrypt from 'bcrypt'
 export const allData = async (req, res) => {
     const allData = await userModel.find()
     res.status(200)
@@ -15,24 +14,6 @@ export const getById = async (req, res) => {
     res.statusMessage = 'OK'
     res.send(getById)
 }
-
-
-export const createData = async (req, res) => {
-    const body = req.body
-    const salt = await bcrypt.genSalt()
-    const hashedPass = await bcrypt.hash(body.password, salt)
-    const createData = await userModel.create({
-        name: body.name,
-        surname: body.surname,
-        age: body.age,
-        email: body.email,
-        password: hashedPass
-    })
-    res.status(201)
-    res.statusMessage = 'created'
-    res.send(createData)
-}
-
 
 export const updateData = async (req, res) => {
     const body = req.body
