@@ -10,7 +10,7 @@ connect(uri)
 dotenv.config()
 const app = express()
 
-app.use(express.urlencoded)
+app.use(express.urlencoded())
 app.use(express.static('public'))
 
 app.get('/index', (req, res) => {
@@ -26,7 +26,7 @@ app.get('/signin', (req, res) => {
 })
 
 
-app.post('/signup', storageMulter.single('photo'), async (req, res) => {
+app.post('/sign-up', storageMulter.single('photo'), async (req, res) => {
     const body = req.body
     const file = req.file
     const salt = await bcrypt.genSalt()
@@ -37,7 +37,7 @@ app.post('/signup', storageMulter.single('photo'), async (req, res) => {
         age: body.age,
         email: body.email,
         password: hashedPass,
-        photo: file
+        photo: file.originalname
     })
     res.send(createData)
 })
