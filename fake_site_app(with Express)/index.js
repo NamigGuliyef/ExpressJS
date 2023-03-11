@@ -6,6 +6,7 @@ import userModel from './model.js';
 import bcrypt from 'bcrypt'
 import storageMulter from './multer.js';
 import jwt from 'jsonwebtoken'
+import authMiddleWare from './authMiddleware.js';
 const uri = "mongodb+srv://node01:node01@cluster0.aeevlra.mongodb.net/?retryWrites=true&w=majority";
 connect(uri)
 dotenv.config()
@@ -14,7 +15,7 @@ const app = express()
 app.use(express.urlencoded())
 app.use(express.static('public'))
 
-const JWT_SECRET = 'CVT_S4CR4T'
+export const JWT_SECRET = 'CVT_S4CR4T'
 
 app.get('/index', (req, res) => {
     res.sendFile(path.resolve('./index.html'))
@@ -58,8 +59,19 @@ app.post('/sign-in', async (req, res) => {
     if (!passRight) {
         res.send('Parol yanlisdir!')
     }
-    const token = jwt.sign({email:body.email},JWT_SECRET)
-    res.send({ token })
+    const token = jwt.sign({ email: body.email }, JWT_SECRET)
+    res.send({ token, message: 'successfully login ✅' })
+})
+
+
+app.get('/profile/:token', authMiddleWare, async (req, res) => {
+    const user = await userModel.findOne({ email: req.email })
+    res.send(
+        `<h1>${user.name}</h1>
+        <h1>${user.surname}</h1>
+        <h1>${user.email}</h1>
+        <img src="/${user.photo}" alt="img">
+        `)
 })
 
 
