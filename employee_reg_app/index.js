@@ -15,7 +15,7 @@ app.post('/signin', async (req, res) => {
     if (employee.password !== password) {
         res.send('Parol yanlisdir')
     }
-    const token = jwt.sign({ email, role: user.role }, jwt_secret)
+    const token = jwt.sign({ email, role: employee.role }, jwt_secret)
     res.send(token)
 })
 
@@ -51,8 +51,6 @@ app.delete('/director/:Id', authMiddleware, async (req, res) => {
     const deleteData = await employeeModel.findOneAndDelete({ _id: Id })
     res.send(deleteData)
 })
-
-
 
 
 app.get('/employee', authMiddleware, async (req, res) => {

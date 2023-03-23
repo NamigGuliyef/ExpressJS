@@ -52,7 +52,7 @@ app.post('/sign-in', async (req, res) => {
     if (!passwordRight) {
         res.send('Parol yanlisdir!')
     }
-    const token = jwt.sign({ email }, JWT_SECRET)
+    const token = jwt.sign({ email }, JWT_SECRET)   
     return res.redirect(`profile/${token}`)
 })
 
