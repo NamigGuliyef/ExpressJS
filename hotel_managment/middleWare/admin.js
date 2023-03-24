@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { jwt_secret } from '../router/account.js'
+import { jwt_secret } from '../controller/account.js'
 
 const authMiddleWare = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1]

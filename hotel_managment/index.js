@@ -15,57 +15,56 @@ app.use(express.json())
 
 const options = {
     definition: {
-      openapi: "3.0.0",
-      info: {
-        title: "Hotel managment API",
-        version: "0.1.0",
-        description:
-          "Otelin idare olunmasi zaman bas veren prosesleri icra edir!",
-        
-        contact: {
-          name: "Guliyef Namig",
-          email: "quliyevnamiq8@gmail.com",
+        openapi: "3.0.0",
+        info: {
+            title: "Hotel managment API",
+            version: "0.1.0",
+            description:
+                "Otelin idare olunmasi zaman bas veren prosesleri icra edir!",
+
+            contact: {
+                name: "Guliyef Namig",
+                email: "quliyevnamiq8@gmail.com",
+            },
         },
-      },
-      servers: [
-        {
-          url: "http://localhost:5050",
+        servers: [
+            {
+                url: "http://localhost:5050",
+            },
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    in: 'header',
+                    name: 'Authorization',
+                    description: 'Bearer Token',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
         },
-      ],
-      components: {
-        securitySchemes: {
-          bearerAuth: {
-            type: 'http',
-            in: 'header',
-            name: 'Authorization',
-            description: 'Bearer Token',
-            scheme: 'bearer',
-            bearerFormat: 'JWT',
-          },
+        security: {
+            bearerAuth: [],
         },
-      },
-      security: {
-        bearerAuth: [],
-      },
     },
     apis: ["./router/*.js"],
-  };
-  
-  const specs = swaggerJSDoc(options);
-  app.use(
+};
+
+const specs = swaggerJSDoc(options);
+app.use(
     "/api-v1",
     swaggerUi.serve,
     swaggerUi.setup(specs)
-  );
+);
 
 
 
 app.use('/api', accountRouter)// signin signup
-app.use('/api/user',userAuthMiddleWare, userRouter)// FIND , FINDONE
-app.use('/api/admin',adminAuthMiddleWare, adminRouter) 
+app.use('/api/user', userAuthMiddleWare, userRouter)// FIND , FINDONE
+app.use('/api/admin', adminAuthMiddleWare, adminRouter)
 
 
-
-app.listen(5050, (req, res) => {
+app.listen(5050, () => {
     console.log('server is up...')
 })

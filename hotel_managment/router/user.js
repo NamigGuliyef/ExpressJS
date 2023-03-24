@@ -1,5 +1,6 @@
 import { Router } from "express";
-import roomModel from "../modules/room.js";
+import { allRooms, getAvailableRooms, getRoomId } from "../controller/user.js";
+
 const r = Router()
 
 
@@ -105,23 +106,9 @@ const r = Router()
 
 
 
-r.get('/room', async (req, res) => {
-    const allRooms = await roomModel.find({ isActive: true })
-    res.send(allRooms)
-})
-
-
-r.get('/room/:id', async (req, res) => {
-    const { id } = req.params
-    const room = await roomModel.findOne({ _id: id })
-    res.send(room)
-})
-
-
-r.get('/availableRooms', async (req, res) => {
-    const availableRooms = await roomModel.find({ availability: true })
-    res.send(availableRooms)
-})
+r.get('/room',allRooms)
+r.get('/room/:id', getRoomId)
+r.get('/availableRooms', getAvailableRooms)
 
 
 
