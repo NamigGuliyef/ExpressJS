@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş</title>
+    <link rel="stylesheet" href="./css/menu.css">
+    <link rel="stylesheet" href="./css/signin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <ul>
+                <li><a href="/index" class="active">Ana səhifə</a></li>
+                <li><a href="/signin">Giriş</a></li>
+                <li><a href="/signup">Qeydiyyat</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="box">
+        <h3>Giriş</h3>
+        <form action="/sign-in" method="post">
+            <input placeholder="İstifadəçi adı" type="text" name="username" class="username"> <br>
+            <input placeholder="Şifrə" type="password" name="password" class="password"> <br>
+            <button type="submit" class="btn">Daxil ol</button>
+        </form>
+    </div>
+</body>
+
+</html>
